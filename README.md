@@ -27,10 +27,10 @@ Note : Set up the backend First because i have used Clever databse from 'clever.
 
 7.to run backend you need springWorksace whre you can run 
 
-8.you need to crate one local database to work after that proceed with next
+8.you need to crate one local database to work after that proceed with next (Not manditory /optional)
 
 9.after getting into project folder in backend go to 
-
+                (Local databse setup Optional)
     project -> src -> main -> resources -> application.properties 
             spring.datasource.username={DATABASE USERNAE}
             spring.datasource.url=jdbc:{URL}  ---       (postgresql://localhost:5432/E-Commerce)
