@@ -231,16 +231,6 @@ const AddItemForm = () => {
                     </button>
                 </div>
             </form>
-
-            {/* --- Display Submitted Data (Optional Debugging) --- */}
-            {submittedData && (
-                <div className="mt-8 p-4 bg-gray-50 border rounded-lg">
-                    <h3 className="text-lg font-semibold mb-2">Last Submitted Data Structure:</h3>
-                    <pre className="text-xs overflow-x-auto p-2 bg-white rounded">
-                        {JSON.stringify(submittedData, null, 2)}
-                    </pre>
-                </div>
-            )}
         </div>
     );
 }
