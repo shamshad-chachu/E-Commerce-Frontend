@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-// Assuming you have a StoreContext
 import { StoreContext } from '../../../Context/StoreContext'; 
-import { Plus, Minus, ShoppingCart } from 'lucide-react'; // Lucide icons
+import { Plus, Minus, ShoppingCart } from 'lucide-react';
 
 const Item = ({ item,image}) => {
   // Destructure state and functions from context
@@ -23,7 +22,7 @@ const Item = ({ item,image}) => {
         {/* Category */}
         <p className="text-xs text-gray-500 mb-2 capitalize">Category: {item.category}</p>
         
-        {/* Description/Short Blurb (Using a placeholder for 'cotte') */}
+        {/* Description/Short Blurb  */}
         <p className="text-sm text-gray-600 mb-3 line-clamp-2">
           {item.description}
         </p>

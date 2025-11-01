@@ -5,10 +5,9 @@ import { images } from "../../../Assets/ImageMap";
 
 
 const Cart = () => {
-    // Note: orderdItems is now properly destructured
+    // orderdItems properly destructured
     const { Products, cartItems, addToCart, removeFromCart, orderdItems, userData } = useContext(StoreContext);
 
-    // --- Helper Functions (UNCHANGED) ---
     
     const getProductById = (id) => {
         return Products.find(product => product.id === id);
@@ -46,13 +45,12 @@ const Cart = () => {
     const deliveryFee = 0;
     const finalTotal = subtotal - discount + deliveryFee;
 
-    // --- Order Handler (UPDATED to include user data and timestamp) ---
-    const HandelOrder = async () => { // Made function async to handle alert/redirection flow
+    // --- Order Handler 
+    const HandelOrder = async () => { 
         
-        // 1. **Authorization Check (CRITICAL)**
+        // 1. Authorization Check
         if (!userData || !userData.userId) {
             alert("Please login to proceed with your order.");
-            // 💡 You might want to navigate to the /Login page here
             return; 
         }
 
@@ -62,12 +60,8 @@ const Cart = () => {
             username: userData.username, 
             orderDate: new Date().toISOString(), 
     
-            // 💡 FIX APPLIED HERE: Map item.id (product ID) to the 'productId' property
             cart: cartProducts.map(item => ({
-                // REMOVE the line 'id: item.id,'
-                // ADD the correct mapping:
-                productId: item.id, // <-- Maps the product's unique ID to the correct backend field name
-                
+                productId: item.id,
                 name: item.name,
                 category: item.category,
                 price: item.sellingprice, 
@@ -79,13 +73,11 @@ const Cart = () => {
         };
 
         try {
-            // Pass the formatted orderData to the context function
+            // Passing the formatted orderData to the context function
             const result = await orderdItems(orderData);
             
-            if (result && result.orderId) { // Assuming your backend returns an orderId on success
+            if (result && result.orderId) { 
                 alert(`Order successfully placed! Order ID: ${result.orderId}`);
-                // 💡 Optional: Redirect the user to an Order confirmation page or the Home page
-                // navigate('/orders');
             } else {
                 alert("Order failed to submit. Please try again.");
             }
@@ -96,7 +88,6 @@ const Cart = () => {
         }
     }
 
-    // --- Render Logic ---
     return (
         <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 bg-white shadow-xl rounded-lg mt-8">
             <h1 className="text-4xl font-extrabold text-gray-900 mb-8 border-b pb-3">
@@ -110,9 +101,7 @@ const Cart = () => {
                 </div>
             ) : (
                 <div className="flex flex-col lg:flex-row gap-8">
-                    {/* ... (Product List remains the same) ... */}
                     
-                    {/* --- LEFT SIDE: Product List --- */}
                     <div className="lg:w-2/3 space-y-4">
                         {cartProducts.map((item) => (
                             <div 
@@ -164,7 +153,7 @@ const Cart = () => {
                                     </p>
                                 </div>
                                 
-                                {/* Remove Button (Full removal) */}
+                                {/* Remove Button */}
                                 <button
                                     onClick={() => {
                                         for (let i = 0; i < item.quantity; i++) {
@@ -180,7 +169,7 @@ const Cart = () => {
                         ))}
                     </div>
 
-                    {/* --- RIGHT SIDE: Order Summary --- */}
+                    {/* RIGHT SIDE: Order Summary*/}
                     <div className="lg:w-1/3 bg-gray-50 p-6 rounded-lg shadow-inner sticky top-4 h-fit">
                         <h3 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Order Summary</h3>
                         

@@ -52,13 +52,7 @@ const Product = () => {
           ))}
         </select>
       </div>
-      {/* -------------------------------------------------- */}
-
-      {/* Responsive Table Container */}
-      {/* The 'overflow-x-auto' class is crucial here. 
-        It ensures that on small screens, if the table content is too wide, 
-        a horizontal scrollbar appears, preventing layout breakage.
-      */}
+      
       <div className="shadow overflow-x-auto border-b border-gray-200 sm:rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">
           

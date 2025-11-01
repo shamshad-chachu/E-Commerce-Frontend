@@ -15,13 +15,11 @@ const EditProd = () => {
 
     return (
         <div className="p-4">
-            {/* Header and Add New Item Button */}
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold text-gray-800">Manage Products Inventory</h1>
                 
-                {/* Add New Item as a Link Button with Plus Icon */}
                 <Link 
-                    to="/Add" // Assuming the route is `/EditProducts/Form`
+                    to="/Add" 
                     className="flex items-center gap-2 px-4 py-2 bg-sky-600 text-white font-medium rounded-lg shadow-md hover:bg-sky-700 transition duration-150"
                 >
                     <Plus size={20} />
@@ -29,12 +27,10 @@ const EditProd = () => {
                 </Link>
             </div>
 
-            {/* Existing Products Table */}
-            {/* Added overflow-x-auto for responsiveness on small screens */}
             <div className="shadow overflow-x-auto border-b border-gray-200 sm:rounded-lg">
                 <table className="min-w-full divide-y divide-gray-200">
                     
-                    {/* Table Header - ADDING IMAGE COLUMN */}
+                    {/* Table Header  */}
                     <thead className="bg-gray-50">
                         <tr>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">

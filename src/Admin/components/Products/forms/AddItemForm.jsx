@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Plus, Trash2, Image } from 'lucide-react'; // Added Image icon
+import { Plus, Trash2, Image } from 'lucide-react'; 
 import {StoreContext} from '../../../../Context/StoreContext'
 // Define the initial state for a new product
 const initialFormState = {
@@ -8,11 +8,10 @@ const initialFormState = {
     price: '',
     sellingprice: '',
     qty: '',
-    // Store File objects instead of URLs. Initial state is 3 null files.
     imgFiles: [null, null, null], 
 };
 
-// Define the standard category options
+// standard category options
 const CATEGORY_OPTIONS = [
     'Fashion',
     'Electronics',
@@ -27,7 +26,7 @@ const AddItemForm = () => {
     const [message, setMessage] = useState('');
     const [submittedData, setSubmittedData] = useState(null);
     const {AddProd} = useContext(StoreContext)
-    // --- Core Form Handling ---
+    // ---  Form Handling ---
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -41,7 +40,6 @@ const AddItemForm = () => {
     // --- File Array Handling ---
 
     const handleImageChange = (index, file) => {
-        // file is a JavaScript File object from e.target.files[0]
         const newImgFiles = [...formData.imgFiles];
         newImgFiles[index] = file;
         setFormData({ ...formData, imgFiles: newImgFiles });
@@ -62,7 +60,7 @@ const AddItemForm = () => {
         setFormData({ ...formData, imgFiles: newImgFiles });
     };
 
-    // --- Submission Handler (Local Only) ---
+    // --- Submission Handler ---
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -77,7 +75,7 @@ const AddItemForm = () => {
             return;
         }
 
-        // 1. Prepare the non-file product data payload
+        // Prepare the non-file product data payload
         const productPayload = {
             name: formData.name,
             category: formData.category,
@@ -87,16 +85,14 @@ const AddItemForm = () => {
             qty: Number(formData.qty),
         };
 
-        // 2. Call the context function, passing the product payload AND the raw files
+        // Call the context function, passing the product payload AND the raw files
         setMessage('Uploading files and adding product...');
         
         // Pass the payload AND the raw File objects
         const apiResponse = await AddProd(productPayload, selectedFiles); 
 
-        // 3. Handle the response
+        //  Handle the response
         if (apiResponse.success) {
-            // OPTIONAL: Update local state if you want to display the new product immediately
-            // addProduct(apiResponse.data); // If you have a local addProduct function
             
             setSubmittedData(apiResponse.data);
             setMessage(`Success! Product "${productPayload.name}" added to database with ID: ${apiResponse.data.id}`);
@@ -106,7 +102,6 @@ const AddItemForm = () => {
         }
     };
 
-    // --- Render Component ---
     
     return (
         <div className="p-4 max-w-4xl mx-auto">
@@ -121,7 +116,7 @@ const AddItemForm = () => {
 
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg">
                 
-                {/* Text and Number Fields (Same as before) */}
+                {/* Text and Number Fields  */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     
                     {/* Name Input */}
@@ -185,7 +180,7 @@ const AddItemForm = () => {
                         <label className="block w-full">
                             <span className="sr-only">Choose file for image {index + 1}</span>
                             <input
-                                // KEY CHANGE: type="file"
+                                
                                 type="file" 
                                 onChange={(e) => handleImageChange(index, e.target.files[0] || null)}
                                 accept="image/*" // Only allow image files

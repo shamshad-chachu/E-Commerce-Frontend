@@ -23,7 +23,7 @@ const RegisterForm = ({ switchToLogin }) => {
 
     // Handle form submission
     const onSubmitHandler = async (event) => {
-        event.preventDefault(); // Stop the default form reload
+        event.preventDefault(); 
 
         // Basic validation check
         if (data.password !== data.confirmPassword) {
@@ -31,7 +31,7 @@ const RegisterForm = ({ switchToLogin }) => {
             return;
         }
 
-        // Prepare data payload (excluding confirmPassword)
+        // Prepare data payload
         const registerData = {
             username: data.username,
             email: data.email,
@@ -58,7 +58,6 @@ const RegisterForm = ({ switchToLogin }) => {
 
 
     return (
-        // Attach the onSubmitHandler to the form
         <form onSubmit={onSubmitHandler} className="space-y-5">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">Create Account</h2>
             
@@ -66,11 +65,11 @@ const RegisterForm = ({ switchToLogin }) => {
             <div>
                 <label className="block text-sm font-medium text-gray-700">Username</label>
                 <input 
-                    name="username" // Add name attribute for tracking
+                    name="username" 
                     type="text" 
                     placeholder="Enter username"
-                    onChange={onChangeHandler} // Add onChange handler
-                    value={data.username} // Bind value to state
+                    onChange={onChangeHandler} 
+                    value={data.username} 
                     className="mt-1 w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
                     required
                 />

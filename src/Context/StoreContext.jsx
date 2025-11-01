@@ -16,7 +16,7 @@ const StoreContextProvider = (props) => {
 
   // --- API FUNCTIONS (Products, Cart, Order, Auth) ---
 
-  // READ: Get All Products (Logic remains the same)
+  // READ: Get All Products 
   const getAllProd = useCallback(async () => {
     try {
       const response = await fetch(`${BASE_URL}/Product/`); // Use BASE_URL
@@ -31,7 +31,7 @@ const StoreContextProvider = (props) => {
     } catch (error) {
       console.error("Network error during getAllProd:", error);
     }
-  }, []); //dependency array means this function is stable
+  }, []);
 
   // CREATE: Add Product (kept as a standalone utility function for clean code)
   const AddProd = async (prodData, rawFiles) => {
@@ -64,9 +64,6 @@ const StoreContextProvider = (props) => {
       const result = await response.json();
       console.log("Product added successfully:", result);
 
-      // CRITICAL: Update product list after a successful addition
-      // You might need to update the logic here if your backend doesn't return the full list
-      // For now, let's just trigger a full refresh:
       getAllProd();
 
       return { success: true, data: result };
@@ -135,7 +132,7 @@ const StoreContextProvider = (props) => {
     }
   };
 
-  // --- CART LOGIC (Logic remains the same) ---
+  // --- CART LOGIC  ---
   const addToCart = (itemId) => {
     setCartItems((prev) => ({
       ...prev,
@@ -157,8 +154,7 @@ const StoreContextProvider = (props) => {
     });
   };
 
-  // --- ORDER FUNCTION (UPDATED) ---
-  // The items parameter will now receive the orderData object from Cart.jsx
+  // --- ORDER FUNCTION  ---
   const orderdItems = async (orderData) => {
     // Placeholder for your backend Order/Checkout endpoint
     console.log(orderData);
@@ -168,9 +164,8 @@ const StoreContextProvider = (props) => {
       const response = await fetch(ORDER_API_URL, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", // Set header for JSON body
+          "Content-Type": "application/json", 
         },
-        // Use JSON.stringify to send the JavaScript object as a JSON string
         body: JSON.stringify(orderData),
       });
 
@@ -183,10 +178,9 @@ const StoreContextProvider = (props) => {
       const result = await response.json();
       console.log("Order placed successfully:", result);
 
-      // OPTIONAL: Clear the cart after successful order
       setCartItems({});
 
-      return result; // Return the backend response
+      return result; 
     } catch (error) {
       console.error("Network or API error during order placement:", error);
       throw error; // Re-throw the error for the component to handle
@@ -212,10 +206,9 @@ const StoreContextProvider = (props) => {
 
       // **SUCCESSFUL LOGIN HANDLING**
       if (result.success) {
-        // Assuming the backend returns 'token', 'username', and 'email'
-        const { username, email, userId /* , token: receivedToken */ } = result;
+        const { username, email, userId  } = result;
 
-        // 1. Store state (Use a placeholder 'dummy-token' if the backend doesn't return one yet)
+        // 1. Store state 
         const receivedToken = "dummy-token-123";
         setToken(receivedToken);
         setUserData({ username, email, userId });
@@ -225,7 +218,7 @@ const StoreContextProvider = (props) => {
         localStorage.setItem("username", username);
         localStorage.setItem("email", email);
 
-        // 💡 Consider storing userId in localStorage too for quick access
+        // Consider storing userId in localStorage too for quick access
         if (userId) localStorage.setItem("userId", userId);
 
         console.log("Login successful, user data stored.");
@@ -282,7 +275,6 @@ const StoreContextProvider = (props) => {
     // ----  GETTING ALL THE ORDERS FROM BACKEND ---
     const getAllOrders =async()=>{
         try {
-            // Note: Your backend endpoint is currently unprotected (no token sent)
             const response = await fetch("http://localhost:8082/Order/") 
             if(!response.ok){
                 console.log(response);
@@ -303,8 +295,8 @@ const StoreContextProvider = (props) => {
       try {
           const response = await fetch(ADMIN_LOGIN_API_URL, {
               method:"POST",
-              headers: { "Content-Type": "application/json" }, // CRITICAL: Add Content-Type
-              body: JSON.stringify(data) // CRITICAL: Use JSON.stringify
+              headers: { "Content-Type": "application/json" }, 
+              body: JSON.stringify(data)
           });
 
           const result = await response.json();
@@ -316,11 +308,10 @@ const StoreContextProvider = (props) => {
 
           // **SUCCESSFUL ADMIN LOGIN HANDLING**
           if (result.success) {
-              // You would typically receive an admin-specific token and data here.
               const { username, email, adminId } = result;
-              const adminToken = "admin-token-123"; // Replace with real token
+              const adminToken = "admin-token-123"; 
 
-              // 1. Store state (Crucial for UI changes)
+              // 1. Store state
               setToken(adminToken);
               setUserData({ username, email, userId: adminId, role: 'ADMIN' });
               SetIsAdmin(true); // Set the admin flag

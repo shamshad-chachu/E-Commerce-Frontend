@@ -1,10 +1,8 @@
 // src/Admin/components/Sidebar.jsx (UPDATED)
 
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
-// import { StoreContext } from "../../../Context/StoreContext"; // Import context
+import { Link, useNavigate } from "react-router-dom"; 
 import { StoreContext } from "../../Context/StoreContext";
-// Import all necessary icons from lucide-react
 import { 
     Menu, 
     X, 
@@ -22,18 +20,16 @@ const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
 
     // Function to handle link click, closing the menu on mobile
     const handleLinkClick = () => {
-        // Tailwind's 'md' breakpoint is typically 768px
         if (window.innerWidth < 768) { 
             setIsMenuOpen(false);
         }
     };
     
-    // 💡 NEW: Admin Logout Handler
+    // Admin Logout Handler
     const handleLogout = () => {
-        Logout(); // Execute the context's logout function
-
-        // navigate(''); // Redirect to the general Login selection page
+        Logout(); 
         handleLinkClick(); // Close the sidebar (especially on mobile)
+        navigate("/")
     };
 
     return (
@@ -59,7 +55,7 @@ const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
                 </div>
 
                 {/* Navigation Links (Main Section) */}
-                <nav className="flex flex-col gap-2 mt-4 grow"> {/* Add flex-grow here */}
+                <nav className="flex flex-col gap-2 mt-4 grow">
                     
                     {/* Dashboard Link */}
                     <Link 

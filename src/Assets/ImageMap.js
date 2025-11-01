@@ -1,6 +1,4 @@
-// src/Assets/ImageMap.js
-
-import menu_5 from './menu_5.png'; // Correctly import local files
+import menu_5 from './menu_5.png'; 
 import menu_6 from './menu_6.png';
 import menu_7 from './menu_7.png';
 import menu_8 from './menu_8.png';

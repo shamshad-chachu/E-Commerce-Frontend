@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// Import Lucide icons, including Search
 import { Home, ShoppingCart, User, ScrollText, Search } from 'lucide-react'; 
 
 const Navebar = () => {
-  // Array of navigation links (excluding the search bar for now)
+  // Array of navigation links
   const navLinks = [
     { to: "/", text: "Home", Icon: Home },
     { to: "/orders", text: "Orders", Icon: ScrollText }, 
@@ -22,7 +21,7 @@ const Navebar = () => {
         {/* Navigation Links and Search Bar Container */}
         <div className="flex items-center space-x-6">
           
-          {/* 🔍 Search Input Field */}
+          {/* Search Input Field */}
           <div className="relative">
             <input 
               type="text" 

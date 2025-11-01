@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Trash2, Plus } from 'lucide-react';
 import { StoreContext } from '../../../../Context/StoreContext';
 
-// Define the standard category options
+// standard category options
 const CATEGORY_OPTIONS = [
     'Fashion',
     'Electronics',
@@ -14,7 +14,7 @@ const CATEGORY_OPTIONS = [
 
 const EditForm = () => {
     const { id } = useParams();
-    const navigate = useNavigate(); // Hook for navigation after successful update/delete
+    const navigate = useNavigate();
     
     // Initialize state to null to indicate loading/no data yet
     const [formData, setFormData] = useState(null); 
@@ -22,7 +22,7 @@ const EditForm = () => {
     const [error, setError] = useState(null);
     const {getOneProd,UpdateProd,DeleteProd} = useContext(StoreContext)
 
-// --- Section 1: Data Fetching (Get Product Details) ---
+// --- Data Fetching (Get Product Details) ---
     useEffect(() => {
         if (!id) {
             setIsLoading(false);
@@ -31,20 +31,17 @@ const EditForm = () => {
 
         const fetchProduct = async () => {
             try {
-                // Adjust the endpoint if necessary (e.g., /products/123)
                 const response = await getOneProd(id); 
                 if (!response.ok) {
                     throw new Error(`Failed to fetch product ${id}. Status: ${response.status}`);
                 }
                 const data = await response.json();
                 
-                // IMPORTANT: Ensure number fields are numbers and img is an array (add an empty string for a new input field)
                 setFormData({
                     ...data,
                     price: parseFloat(data.price) || 0,
                     sellingprice: parseFloat(data.sellingprice) || 0,
                     qty: parseInt(data.qty) || 0,
-                    // Ensure 'img' is an array, and append an empty string for the "add new image" field
                     img: Array.isArray(data.img) ? [...data.img, ''] : [''],
                 });
             } catch (err) {
@@ -58,7 +55,7 @@ const EditForm = () => {
         fetchProduct();
     }, [id]);
 
-// --- Section 2: Form Handlers ---
+// ---  Form Handlers ---
     
     // General handler for all fields (name, category, price, qty)
     const handleFormChange = (e) => {
@@ -89,28 +86,28 @@ const EditForm = () => {
         setFormData({ ...formData, img: newImg });
     };
 
-// --- Section 3: Submission & Deletion Logic (API Interaction) ---
+// ---Submission & Deletion Logic---
 
 const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // 1. Prepare data: filter out empty image URL strings
+    //  Prepare data: filter out empty image URL strings
     const productToUpdate = {
         ...formData,
         img: formData.img.filter(url => url.trim() !== ''), 
     };
 
     try {
-        // 2. Call the context function with the ID and cleaned product data
+        //  Call the context function with the ID and cleaned product data
         const response = await UpdateProd(id, productToUpdate);
 
         if (!response.ok) {
-            // 3. Handle Error (reads JSON response body for error message)
+            //  Handle Error 
             const errorData = await response.json(); 
             throw new Error(errorData.message || `Failed to update product ${id}. Status: ${response.status}`);
         }
 
-        // 4. Handle Success
+        //  Handle Success
         alert(`✅ Product ${id} updated successfully!`);
         navigate('/EditProducts/*'); 
 
@@ -119,20 +116,17 @@ const handleSubmit = async (e) => {
         alert(`Error updating product: ${err.message}`);
     }
 };
-    // Function to handle the product deletion (DELETE)
+    // Function to handle the product deletion
     const handleDelete = async () => {
         if (!window.confirm(`Are you absolutely sure you want to delete Product ${formData.name} (ID: ${id})? This action cannot be undone.`)) {
             return;
         }
 
         try {
-            // Use the context function instead of a hardcoded fetch call
+            // Use the context function 
             const response = await DeleteProd(id); 
     
             if (!response.ok) {
-                // Note: DELETE responses often have no body, so check status before assuming JSON body
-                // If Spring Boot returns a plain error message, this could fail. 
-                // For DELETE, checking response.ok is often sufficient.
                 throw new Error(`Failed to delete product ${id}. Status: ${response.status}`);
             }
             alert(`✅ Product ${id} deleted successfully!`);
@@ -143,7 +137,7 @@ const handleSubmit = async (e) => {
         }
     };
 
-// --- Section 4: Render Logic ---
+// ---  Render Logic ---
 
     if (isLoading) {
         return <div className="p-4 max-w-4xl mx-auto text-center text-lg mt-10">Loading product details...</div>;
@@ -153,7 +147,6 @@ const handleSubmit = async (e) => {
         return <div className="p-4 max-w-4xl mx-auto text-center text-red-600 text-lg mt-10">Error: {error}</div>;
     }
 
-    // Since formData is null-checked, we can safely use it here.
     return (
         <div className="p-4 max-w-4xl mx-auto">
             <h1 className="text-3xl font-bold mb-6 text-gray-800">
@@ -207,7 +200,6 @@ const handleSubmit = async (e) => {
                                 type="number" 
                                 name={field} 
                                 id={field} 
-                                // Ensure value is a number for controlled number inputs
                                 value={formData[field]} 
                                 onChange={handleFormChange} 
                                 required 

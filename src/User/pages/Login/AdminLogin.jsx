@@ -1,12 +1,10 @@
-// src/User/pages/Login/AdminLogin.jsx (CORRECTED)
-
 import React, { useState, useContext } from 'react';
 import { StoreContext } from '../../../Context/StoreContext';
-import { useNavigate } from 'react-router-dom'; // Consider adding this for redirection
+import { useNavigate } from 'react-router-dom';
 
-const AdminLoginComponent = () => { // Renamed the component to avoid conflict with context function
+const AdminLoginComponent = () => { 
     const { AdminLogin } = useContext(StoreContext);
-    const navigate = useNavigate(); // Initialize navigate hook
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         email: "",
@@ -19,7 +17,7 @@ const AdminLoginComponent = () => { // Renamed the component to avoid conflict w
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // CRITICAL: Prevent default form submission/page reload
+        e.preventDefault(); 
         
         try {
             // Call the AdminLogin context function
@@ -28,7 +26,7 @@ const AdminLoginComponent = () => { // Renamed the component to avoid conflict w
             if (result && result.success) {
                 alert("Admin Login successful! Redirecting to dashboard...");
                 
-                navigate('/Products'); // Use this for actual redirection
+                navigate('/Products');
             } else {
                 alert(result.error || "Admin Login failed. Invalid credentials.");
             }
@@ -44,12 +42,11 @@ const AdminLoginComponent = () => { // Renamed the component to avoid conflict w
                 <h2 className="text-3xl font-bold text-teal-600">Admin Portal Login</h2>
                 <p className="text-gray-600">Please enter your administrative credentials.</p>
                 
-                {/* Attach handleSubmit to the form */}
                 <form onSubmit={handleSubmit} className="space-y-4 pt-4"> 
                     
                     <input 
                         type="email" 
-                        name="email" // CRITICAL: Add name attribute
+                        name="email" 
                         placeholder="Admin Email" 
                         required 
                         onChange={onChangeHandler}
@@ -59,7 +56,7 @@ const AdminLoginComponent = () => { // Renamed the component to avoid conflict w
                     
                     <input 
                         type="password" 
-                        name="password" // CRITICAL: Add name attribute
+                        name="password" 
                         placeholder="Password" 
                         required 
                         onChange={onChangeHandler}
@@ -77,4 +74,4 @@ const AdminLoginComponent = () => { // Renamed the component to avoid conflict w
     );
 };
 
-export default AdminLoginComponent; // Export the renamed component
+export default AdminLoginComponent; 

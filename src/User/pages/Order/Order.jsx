@@ -1,11 +1,10 @@
 // src/components/Orders/Order.jsx (UPDATED)
 
 import React from 'react';
-import moment from 'moment'; // 💡 Suggestion: Use 'moment' or date-fns for easy date formatting
+import moment from 'moment'; 
 
 const Order = ({ order,images }) => {
-  // Use a default image if the product doesn't have an image field yet
-  const PLACEHOLDER_IMG = "https://via.placeholder.com/60?text=Product";
+
 
   return (
     <div className='order-card border p-4 rounded-lg shadow-md bg-white'>
@@ -37,16 +36,14 @@ const Order = ({ order,images }) => {
         {order.cart.map((item, index) => (
           <div key={index} className='item-row flex items-center justify-between border-b last:border-b-0 py-2'>
             <div className='flex items-center space-x-4'>
-              {/* Product Image (Placeholder) */}
+              {/* Product Image */}
               <img
-              //using dummy images not from backend 
-                // src={PLACEHOLDER_IMG} 
                 src={images[order.id]}
                 alt={item.name}
                 className='w-14 h-14 object-cover rounded-md'
               />
               
-              {/* Product Details (Key-Value Pair) */}
+              {/* Product Details*/}
               <div>
                 <p className='font-semibold text-gray-800'>{item.name}</p>
                 <p className='text-sm text-gray-500'>Category: {item.category}</p>

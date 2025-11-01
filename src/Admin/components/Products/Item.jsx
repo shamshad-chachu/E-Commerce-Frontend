@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Item = ({ product,images}) => {
-  // Destructure the properties, including the new 'img' array
   const { name, category, price, sellingprice, qty, img } = product;
   
   // Use the first image in the array
@@ -14,6 +13,7 @@ const Item = ({ product,images}) => {
         {imageSrc ? (
           <img 
           // src={imageSrc}
+          //not using img from the backend becouse not use cloud database to store it
             src={images[product.id]} 
             alt={name} 
             className="h-10 w-10 rounded object-cover" 

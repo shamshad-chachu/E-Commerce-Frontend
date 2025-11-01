@@ -1,5 +1,3 @@
-// src/User/pages/Login/UserRoleSelection.jsx (NEW FILE)
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { User, Shield } from 'lucide-react';
@@ -13,7 +11,7 @@ const UserRoleSelection = () => {
                 
                 <div className="flex justify-around space-x-6">
                     
-                    {/* 1. User/Customer Option */}
+                    {/* User/Customer Option */}
                     <Link
                         to="/Login/user" // Route for User Login/Register
                         className="flex-1 p-6 border-4 border-indigo-200 rounded-xl hover:shadow-lg transition duration-300 transform hover:scale-105 bg-indigo-50"
@@ -23,7 +21,7 @@ const UserRoleSelection = () => {
                         <span className="block text-sm text-gray-500">Shop & Track Orders</span>
                     </Link>
 
-                    {/* 2. Admin Option */}
+                    {/*  Admin Option */}
                     <Link
                         to="/Login/admin" // Route for Admin Login
                         className="flex-1 p-6 border-4 border-teal-200 rounded-xl hover:shadow-lg transition duration-300 transform hover:scale-105 bg-teal-50"

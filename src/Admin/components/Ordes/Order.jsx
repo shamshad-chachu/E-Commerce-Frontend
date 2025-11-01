@@ -1,11 +1,7 @@
-// src/components/Orders/Order.jsx (UPDATED)
-
 import React from 'react';
-import moment from 'moment'; // 💡 Suggestion: Use 'moment' or date-fns for easy date formatting
+import moment from 'moment';
 
 const Order = ({ order,images}) => {
-  // Use a default image if the product doesn't have an image field yet
-  const PLACEHOLDER_IMG = "https://via.placeholder.com/60?text=Product";
 
   return (
     <div className='order-card border p-4 rounded-lg shadow-md bg-white'>
@@ -39,7 +35,6 @@ const Order = ({ order,images}) => {
             <div className='flex items-center space-x-4'>
               {/* Product Image (Placeholder) */}
               <img
-                // src={PLACEHOLDER_IMG}
                 src={images[order.id]} 
                 alt={item.name}
                 className='w-14 h-14 object-cover rounded-md'

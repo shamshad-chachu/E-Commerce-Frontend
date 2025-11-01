@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import RegisterForm from './RegisterForm';
 import Loginform from './Loginform';
 import { LogIn, UserPlus, LogOut } from 'lucide-react'; // Icons
-import { StoreContext } from '../../../Context/StoreContext'; // Import StoreContext
+import { StoreContext } from '../../../Context/StoreContext';
 
 const LoginRegister = () => {
     // 1. Get userData and Logout function from context
@@ -11,7 +11,7 @@ const LoginRegister = () => {
     // State to toggle between Login (true) and Register (false)
     const [isLoggdIn, setIsLoggdIn] = useState(true); 
 
-    // Function to handle logout (optional, as Logout() from context is often enough)
+    // Function to handle logout 
     const handleLogout = () => {
         Logout();
     };

@@ -1,19 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Pencil } from 'lucide-react'; // Import the pencil icon
+import { Pencil } from 'lucide-react'; 
 import { ImageMap} from '../../../Assets/ImageMap';
 
 
 const ProdUpdate = ({ item,images}) => {
-    // Destructure the properties, including the new 'img' array
     const { id, name, category, price, sellingprice, qty, img } = item;
     
     // Get the source for the first image
     // const imageSrc = img && img.length > 0 ? item.img[1] : null;
 
-    // 1. Get the path string from the context (e.g., 'src/Assets/menu_5.png')
+    // Get the path string from the context ( 'src/Assets/menu_5.png')
     const imagePathString = img && img.length > 0 ? item.img[0] : null;
-    // 2. Resolve the path string to the actual imported asset using the ImageMap
     const imageSrc = imagePathString ? ImageMap[imagePathString] : null;
     
     
@@ -22,7 +20,7 @@ const ProdUpdate = ({ item,images}) => {
 
     return (
         <tr>
-            {/* Image Column (NEW) */}
+            {/* Image Column*/}
             <td className="px-6 py-3 whitespace-nowrap">
                 {imageSrc ?(
                     <img 

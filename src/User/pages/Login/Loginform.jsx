@@ -4,14 +4,13 @@ import { StoreContext } from '../../../Context/StoreContext';
 const Loginform = ({ switchToRegister }) => {
     const { Login } = useContext(StoreContext);
 
-    // State updated to use 'email' instead of 'mobileNumber'
+    
     const [data, setData] = useState({
         username: "",
-        email: "", // <-- CHANGED
+        email: "", 
         password: ""
     });
 
-    // Handle input changes (still works, as it uses event.target.name)
     const onChangeHandler = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -22,13 +21,11 @@ const Loginform = ({ switchToRegister }) => {
     const onSubmitHandler = async (event) => {
         event.preventDefault();
 
-        // Data sent to backend now includes 'email'
+        // Data sent to backend '
         const loginData = {
-            email: data.email, // <-- CHANGED
+            email: data.email, 
             password: data.password,
             username: data.username,
-            // Note: We typically don't need to send username for login if we search by email.
-            // But we can leave it in the model for flexibility.
         };
 
         try {
@@ -36,7 +33,6 @@ const Loginform = ({ switchToRegister }) => {
             
             if (result && result.success) {
                 alert("Login successful!");
-                // Handle redirection/token saving here
             } else {
                 alert(result.error || "Login failed. Invalid credentials or network error.");
             }
@@ -51,7 +47,6 @@ const Loginform = ({ switchToRegister }) => {
         <form onSubmit={onSubmitHandler} className="space-y-5">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">Welcome Back</h2>
             
-            {/* Username (Optional for Login, but kept if you want to use it) */}
             <div>
                 <label className="block text-sm font-medium text-gray-700">Username</label>
                 <input 
@@ -61,16 +56,14 @@ const Loginform = ({ switchToRegister }) => {
                     onChange={onChangeHandler} 
                     value={data.username} 
                     className="mt-1 w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-                    // Required status can be optional if you rely solely on email/password
                 />
             </div>
 
-            {/* Email Input (Replaces Mobile Number) */}
             <div>
                 <label className="block text-sm font-medium text-gray-700">Email</label>
                 <input 
-                    name="email" // <-- CHANGED: Input name is 'email'
-                    type="email" // <-- CHANGED: Type is 'email'
+                    name="email" 
+                    type="email" 
                     placeholder="Enter your email"
                     onChange={onChangeHandler} 
                     value={data.email} 

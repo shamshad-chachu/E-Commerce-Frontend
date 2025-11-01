@@ -5,7 +5,7 @@ import { Filter } from 'lucide-react';
 import { images } from "../../../Assets/ImageMap";
 
 
-// Use the category options provided
+//  the category options 
 const CATEGORY_OPTIONS = [
     'Fashion',
     'Electronics',
@@ -17,12 +17,10 @@ const CATEGORY_OPTIONS = [
 const Products = () => {
     // Get products from context
     const { Products } = useContext(StoreContext);
-    // State to hold the currently selected filter category, initialized to "All"
     const [category, setCategory] = useState("All"); 
 
     // Filter the products based on the selected category
     const filteredProducts = Products.filter(item => 
-        // If category is "All" OR item's category matches the selected category
         category === "All" || item.category === category
     );
 

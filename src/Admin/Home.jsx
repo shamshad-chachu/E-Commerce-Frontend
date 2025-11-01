@@ -10,15 +10,12 @@ import Orders from "./components/Ordes/Orders";
 
 
 const Home = () => {
-  // State to track if the mobile menu is open or closed
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {getAllProd} = useContext(StoreContext);
   useEffect(()=>{ getAllProd()},[])
   return (
-    // Use a regular div or flex layout for the container
     <div className="flex min-h-screen">
       
-      {/* Sidebar - Pass the state and setter */}
       <Sidebar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       
       {/* Main Content Area */}
@@ -26,7 +23,6 @@ const Home = () => {
         <Routes>
           <Route path="/" element={<Product />} />
           <Route path="/Products" element={<Product />} />
-          {/* <Route path="/Products/AddEdit" element={<EditProd/>} /> */}
           <Route path="/EditProducts/*" element={<EditProd />} />
           <Route path="/Orders" element={<Orders/>} />
           <Route path="/Edit/:id" element={<EditForm/>}/>
